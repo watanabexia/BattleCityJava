@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>edu.uchicago.gerber._04interfaces.R9_9</OriginalElement>
+  <nodes>
+    <node x="40.5" y="78.0">edu.uchicago.gerber._04interfaces.R9_9.Student</node>
+    <node x="0.0" y="385.0">edu.uchicago.gerber._04interfaces.R9_9.Lecture</node>
+    <node x="134.0" y="307.0">edu.uchicago.gerber._04interfaces.R9_9.Course</node>
+    <node x="213.0" y="156.0">edu.uchicago.gerber._04interfaces.R9_9.Professor</node>
+    <node x="287.25" y="234.0">edu.uchicago.gerber._04interfaces.R9_9.SeminarSpeaker</node>
+    <node x="130.0" y="385.0">edu.uchicago.gerber._04interfaces.R9_9.Seminar</node>
+    <node x="264.0" y="385.0">edu.uchicago.gerber._04interfaces.R9_9.ComputerLab</node>
+    <node x="504.0" y="156.0">edu.uchicago.gerber._04interfaces.R9_9.Janitor</node>
+    <node x="358.0" y="78.0">edu.uchicago.gerber._04interfaces.R9_9.Employee</node>
+    <node x="82.25" y="234.0">edu.uchicago.gerber._04interfaces.R9_9.DepartmentChair</node>
+    <node x="0.0" y="156.0">edu.uchicago.gerber._04interfaces.R9_9.TeachingAssistant</node>
+    <node x="216.64285714285717" y="0.0">edu.uchicago.gerber._04interfaces.R9_9.Person</node>
+    <node x="358.0" y="156.0">edu.uchicago.gerber._04interfaces.R9_9.Secretary</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Seminar" target="edu.uchicago.gerber._04interfaces.R9_9.Course" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Lecture" target="edu.uchicago.gerber._04interfaces.R9_9.Course" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="55.0" y="360.0" />
+      <point x="187.0" y="360.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Secretary" target="edu.uchicago.gerber._04interfaces.R9_9.Employee" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Employee" target="edu.uchicago.gerber._04interfaces.R9_9.Person" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="421.0" y="53.0" />
+      <point x="269.14285714285717" y="53.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Janitor" target="edu.uchicago.gerber._04interfaces.R9_9.Employee" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="556.0" y="131.0" />
+      <point x="421.0" y="131.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.ComputerLab" target="edu.uchicago.gerber._04interfaces.R9_9.Course" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="342.5" y="360.0" />
+      <point x="187.0" y="360.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.DepartmentChair" target="edu.uchicago.gerber._04interfaces.R9_9.Professor" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="174.75" y="209.0" />
+      <point x="275.5" y="209.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.SeminarSpeaker" target="edu.uchicago.gerber._04interfaces.R9_9.Professor" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="376.25" y="209.0" />
+      <point x="275.5" y="209.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Professor" target="edu.uchicago.gerber._04interfaces.R9_9.Employee" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="275.5" y="131.0" />
+      <point x="421.0" y="131.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.Student" target="edu.uchicago.gerber._04interfaces.R9_9.Person" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="96.5" y="53.0" />
+      <point x="269.14285714285717" y="53.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._04interfaces.R9_9.TeachingAssistant" target="edu.uchicago.gerber._04interfaces.R9_9.Student" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="304.0" y="206.5" />
+  <SelectedNodes>
+    <node>edu.uchicago.gerber._04interfaces.R9_9.Lecture</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>packageLocal</VISIBILITY>
+</Diagram>
+
