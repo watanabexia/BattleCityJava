@@ -5,3 +5,5 @@
 out
 gen
 *.DS_Store
+*.class
+target

@@ -1,12 +1,10 @@
-package edu.uchicago.gerber._05dice.pig;
+package edu.uchicago.gerber._05dice.P10_19;
 
 import javax.swing.*;
 
-public class PigDriver {
-
+public class Driver {
     public static void main(String[] args) {
-        //pig game here
-        PigFrame frame = new PigFrame();
+        BillFrame frame = new BillFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
