@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>edu.uchicago.gerber._06design.R12_13</OriginalElement>
+  <nodes>
+    <node x="12.375" y="88.0">edu.uchicago.gerber._06design.R12_13.VendingMachine</node>
+    <node x="106.0" y="0.0">edu.uchicago.gerber._06design.R12_13.Button</node>
+    <node x="0.0" y="0.0">edu.uchicago.gerber._06design.R12_13.Coin</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="edu.uchicago.gerber._06design.R12_13.VendingMachine" target="edu.uchicago.gerber._06design.R12_13.Button" relationship="DEPENDENCY">
+      <point x="-45.0" y="-14.0" />
+      <point x="57.375" y="68.0" />
+      <point x="38.0" y="68.0" />
+      <point x="38.0" y="58.0" />
+      <point x="131.75" y="58.0" />
+      <point x="-25.75" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._06design.R12_13.VendingMachine" target="edu.uchicago.gerber._06design.R12_13.Coin" relationship="TO_MANY">
+      <point x="45.0" y="-14.0" />
+      <point x="147.375" y="68.0" />
+      <point x="162.5" y="68.0" />
+      <point x="162.5" y="48.0" />
+      <point x="64.5" y="48.0" />
+      <point x="21.5" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._06design.R12_13.VendingMachine" target="edu.uchicago.gerber._06design.R12_13.Button" relationship="TO_MANY">
+      <point x="45.0" y="-14.0" />
+      <point x="147.375" y="68.0" />
+      <point x="162.5" y="68.0" />
+      <point x="162.5" y="48.0" />
+      <point x="183.25" y="48.0" />
+      <point x="25.75" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._06design.R12_13.VendingMachine" target="edu.uchicago.gerber._06design.R12_13.Coin" relationship="DEPENDENCY">
+      <point x="-45.0" y="-14.0" />
+      <point x="57.375" y="68.0" />
+      <point x="38.0" y="68.0" />
+      <point x="38.0" y="58.0" />
+      <point x="21.5" y="58.0" />
+      <point x="-21.5" y="14.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="104.5" y="58.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

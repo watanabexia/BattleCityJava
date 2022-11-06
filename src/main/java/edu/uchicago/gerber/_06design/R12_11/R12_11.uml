@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>edu.uchicago.gerber._06design.R12_11</OriginalElement>
+  <nodes>
+    <node x="13.0" y="0.0">edu.uchicago.gerber._06design.R12_11.Country</node>
+    <node x="0.0" y="78.0">edu.uchicago.gerber._06design.R12_11.CountrySet</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="edu.uchicago.gerber._06design.R12_11.CountrySet" target="edu.uchicago.gerber._06design.R12_11.Country" relationship="DEPENDENCY">
+      <point x="-34.75" y="-14.0" />
+      <point x="34.75" y="53.0" />
+      <point x="41.25" y="53.0" />
+      <point x="-28.25" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._06design.R12_11.CountrySet" target="edu.uchicago.gerber._06design.R12_11.Country" relationship="TO_MANY">
+      <point x="34.75" y="-14.0" />
+      <point x="104.25" y="53.0" />
+      <point x="97.75" y="53.0" />
+      <point x="28.25" y="14.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="69.5" y="53.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

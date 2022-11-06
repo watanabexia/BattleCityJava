@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>edu.uchicago.gerber._06design.R12_10</OriginalElement>
+  <nodes>
+    <node x="3.1666666666666714" y="0.0">edu.uchicago.gerber._06design.R12_10.Question</node>
+    <node x="106.5" y="78.0">edu.uchicago.gerber._06design.R12_10.ChoiceQuestion</node>
+    <node x="0.5" y="78.0">edu.uchicago.gerber._06design.R12_10.Quiz</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="edu.uchicago.gerber._06design.R12_10.Quiz" target="edu.uchicago.gerber._06design.R12_10.Question" relationship="TO_MANY">
+      <point x="-21.5" y="-14.0" />
+      <point x="22.0" y="53.0" />
+      <point x="23.33333333333333" y="53.0" />
+      <point x="-40.333333333333336" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._06design.R12_10.ChoiceQuestion" target="edu.uchicago.gerber._06design.R12_10.Question" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="194.0" y="53.0" />
+      <point x="104.00000000000001" y="53.0" />
+      <point x="40.33333333333334" y="14.0" />
+    </edge>
+    <edge source="edu.uchicago.gerber._06design.R12_10.Quiz" target="edu.uchicago.gerber._06design.R12_10.Question" relationship="DEPENDENCY">
+      <point x="21.5" y="-14.0" />
+      <point x="65.0" y="53.0" />
+      <point x="63.66666666666668" y="53.0" />
+      <point x="7.105427357601002E-15" y="14.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="140.5" y="53.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
