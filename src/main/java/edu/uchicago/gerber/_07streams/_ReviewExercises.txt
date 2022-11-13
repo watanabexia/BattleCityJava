@@ -2,8 +2,115 @@
 # Use this file to answer Review Exercises from the Big Java textbook
 #########################################################################
 
+R13.1 Terms
+Define the terms
+a. Recursion
+the same computation occurs repeatedly, as the problem is solved.
+Function calls itself.
+
+b. Iteration
+the same computation occurs repeatedly.
+
+c.  Infinite recursion
+a method calling itself over and over with no end in sight.
+
+d. Recursive helper method
+a method that help to solve a problem in a recursive way.
 
 
+R13.2 Smallest value
+Smallest(A, i) {
+    if (i == A.len - 1) {
+        return A[i];
+    }
+    return min(A[i], Smallest(A, i+1));
+}
+Smallest(A, 0);
+
+R13.4 Sort array of numbers
+RecursiveSelection(A, i) {
+    if (i == A.len - 1) {
+        return ;
+    }
+    replace the i-th element with the smallest element in A[i...A.len-1]
+    RecursiveSelection(A, i+1);
+}
 
 
+R13.6 Exponents recursively
+exponential(x, n) {
+    if (n == 0) {
+        return 1;
+    }
+    return x*exponential(x, n-1);
+}
 
+R13.8 Factorial recursively
+factorial(n) {
+    if (n == 1) {
+        return 1;
+    }
+    return n*fractorial(n-1);
+}
+
+
+R19.1 operations on Stream<String>
+Provide expressions that compute the following information about a Stream<String>.
+a. How many elements start with the letter a?
+words.filter(w -> w.charAt(0) == 'a').conut()
+
+b. How many elements of length greater than ten start with the letter a?
+words.filter(w -> w.length() > 10).filter(w -> w.charAt(0) == 'a').count()
+
+c.  Are there at least 100 elements that start with the letter a? (Don’t count them all
+if there are more.)
+words.filter(w -> w.charAt(0) == 'a').limit(100).count() == 100
+
+R19.3 How to read Java8
+What is the difference between these two expressions?
+words.filter(w -> w.length() > 10).limit(100).count()
+words.limit(100).filter(w -> w.length() > 10).count()
+
+the first expression is to find the number of words with length greater than 10,
+and it will stop finding if it has found 100 qualified words.
+the second expression is to find the number of words with length greater than 10
+among the first 100 words.
+
+R19.6 Transforming values
+How do you turn a Stream<Double> into a Stream<String>, with each number turned
+into the equivalent string? How do you turn it back into a Stream<Double>?
+
+doubles.map(d -> Double.toString(d))
+
+words.map(w -> Double.parseDouble(w))
+
+R19.11 Terminal operations
+List all terminal operations on object streams and primitive-type streams that have
+been discussed in this chapter.
+
+count
+findFirst
+findAny
+max
+min
+toArray
+collect
+forEach
+allMatch
+anyMatch
+noneMatch
+
+R19.12 Collectors
+List all collectors that were introduced in this chapter.
+groupingBy
+toSet
+joining
+counting
+summingInt
+summingDouble
+summingLong
+averagingInt
+averagingDouble
+averagingLong
+maxBy
+minBy
