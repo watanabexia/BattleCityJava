@@ -1,16 +1,14 @@
 package edu.uchicago.gerber._08final.mvc.view;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import edu.uchicago.gerber._08final.mvc.model.CommandCenter;
-import edu.uchicago.gerber._08final.mvc.model.Falcon;
-import edu.uchicago.gerber._08final.mvc.model.Movable;
+import edu.uchicago.gerber._08final.mvc.model.*;
 
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.BiConsumer;
-
+import java.util.function.Function;
 
 
 public class GamePanel extends Panel {
@@ -89,10 +87,12 @@ public class GamePanel extends Panel {
 		else {
 
 			iterateMovables(grpOff,
-				CommandCenter.getInstance().getMovDebris(),
-				CommandCenter.getInstance().getMovFloaters(),
-				CommandCenter.getInstance().getMovFoes(),
-				CommandCenter.getInstance().getMovFriends());
+				CommandCenter.getInstance().getMovHQs(),
+				CommandCenter.getInstance().getMovEnemies(),
+				CommandCenter.getInstance().getMovBullets_enemy(),
+				CommandCenter.getInstance().getMovFriends(),
+				CommandCenter.getInstance().getMovBullets_friend(),
+				CommandCenter.getInstance().getMovWalls());
 
 
 			drawNumberShipsLeft(grpOff);
@@ -105,9 +105,6 @@ public class GamePanel extends Panel {
 		// without the use of a double-buffered off-screen image, you will see flickering.
 		g.drawImage(imgOff, 0, 0, this);
 	} 
-
-
-	
 
 	@SafeVarargs
 	private final void iterateMovables(final Graphics g, List<Movable>... arrayOfListMovables){
@@ -125,42 +122,46 @@ public class GamePanel extends Panel {
 		
 	}
 
-
 	private void drawNumberShipsLeft(Graphics g){
-		int numFalcons = CommandCenter.getInstance().getNumFalcons();
-		while (numFalcons > 0){
-			drawOneShipLeft(g, numFalcons--);
-		}
+//		int numFalcons = CommandCenter.getInstance().getNumFalcons();
+
+		g.setColor(Color.white);
+		g.setFont(fnt);
+		g.drawString("LEVEL:  " + CommandCenter.getInstance().getLevel(), fontWidth, 3*fontHeight);
+		g.drawString("ENEMY LEFT:  " + CommandCenter.getInstance().getCurrentMap().Playbook.size(), fontWidth, 5*fontHeight);
+		g.drawString("PLAYER HP:  " + CommandCenter.getInstance().getNumFalcons(), fontWidth, 7*fontHeight);
+
+//		while (numFalcons > 0){
+//			drawOneShipLeft(g, numFalcons--);
+//		}
 	}
 
 	// Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
-	private void drawOneShipLeft(Graphics g, int offSet) {
-		Falcon falcon = CommandCenter.getInstance().getFalcon();
-
-		g.setColor(falcon.getColor());
-
-		g.drawPolygon(
-					Arrays.stream(falcon.getCartesians())
-							.map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
-							.mapToInt(Integer::intValue)
-							.toArray(),
-
-					Arrays.stream(falcon.getCartesians())
-							.map(pnt -> pnt.y + Game.DIM.height - 40)
-							.mapToInt(Integer::intValue)
-							.toArray(),
-
-					falcon.getCartesians().length);
-
-
-
-	}
+//	private void drawOneShipLeft(Graphics g, int offSet) {
+//		Tank tank = CommandCenter.getInstance().getTank_player();
+//
+//		g.setColor(tank.getColor());
+//
+//		g.drawPolygon(
+//					Arrays.stream(tank.getCartesians())
+//							.map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
+//							.mapToInt(Integer::intValue)
+//							.toArray(),
+//
+//					Arrays.stream(tank.getCartesians())
+//							.map(pnt -> pnt.y + Game.DIM.height - 40)
+//							.mapToInt(Integer::intValue)
+//							.toArray(),
+//
+//					tank.getCartesians().length);
+//
+//	}
 	
 	private void initView() {
 		Graphics g = getGraphics();			// get the graphics context for the panel
 		g.setFont(fnt);						// take care of some simple font stuff
 		fmt = g.getFontMetrics();
-		fontWidth = fmt.getMaxAdvance();
+		fontWidth = fmt.getMaxAdvance() + Game.FIELD_LENGTH;
 		fontHeight = fmt.getHeight();
 		g.setFont(fntBig);					// set font info
 	}
@@ -196,15 +197,15 @@ public class GamePanel extends Panel {
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
 						+ fontHeight + 200);
-		strDisplay = "left pinkie on 'A' for Shield";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 240);
+//		strDisplay = "left pinkie on 'A' for Shield";
+//		grpOff.drawString(strDisplay,
+//				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+//						+ fontHeight + 240);
 
-		strDisplay = "'Numeric-Enter' for Hyperspace";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 280);
+//		strDisplay = "'Numeric-Enter' for Hyperspace";
+//		grpOff.drawString(strDisplay,
+//				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+//						+ fontHeight + 280);
 	}
 	
 

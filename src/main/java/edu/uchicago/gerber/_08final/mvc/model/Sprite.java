@@ -18,12 +18,14 @@ public abstract class Sprite implements Movable {
     //the center-point of this sprite
     private Point center;
     //this causes movement; change-in-x and change-in-y
-    private double deltaX, deltaY;
+    private int deltaX, deltaY;
 
     //every sprite has a team: friend, foe, floater, or debris.
     private Team team;
     //the radius of circumscribing circle
     private int radius;
+    private int width;
+    private int height;
 
     //orientation from 0-359
     private int orientation;
@@ -54,6 +56,9 @@ public abstract class Sprite implements Movable {
 
     }
 
+    public void setCenter(int x, int y) {
+        center = new Point(x, y);
+    }
 
     @Override
     public void move() {
@@ -63,24 +68,9 @@ public abstract class Sprite implements Movable {
         // where you need to override the move() method.
         Point center = getCenter();
 
-        //right-bounds reached
-        if (center.x > Game.DIM.width) {
-            setCenter(new Point(1, center.y));
-        //left-bounds reached
-        } else if (center.x < 0) {
-            setCenter(new Point(Game.DIM.width - 1, center.y));
-        //bottom-bounds reached
-        } else if (center.y > Game.DIM.height) {
-            setCenter(new Point(center.x, 1));
-        //top-bounds reached
-        } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.DIM.height - 1));
-        //in-bounds
-        } else {
-            double newXPos = center.x + getDeltaX();
-            double newYPos = center.y + getDeltaY();
-            setCenter(new Point((int) newXPos, (int) newYPos));
-        }
+        double newXPos = center.x + getDeltaX();
+        double newYPos = center.y + getDeltaY();
+        setCenter(new Point((int) newXPos, (int) newYPos));
 
         //expire (decrement expiry) on short-lived objects only
         //the default value of expiry is zero, so this block will only apply to expiring sprites
@@ -124,10 +114,10 @@ public abstract class Sprite implements Movable {
         //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
         final int PRECISION_MULTIPLIER = 1000;
         Function<PolarPoint, Point> polarToCartTransform = pp -> new Point(
-                (int) (getCenter().x + pp.getR() * getRadius() * PRECISION_MULTIPLIER
+                (int) (getCenter().x + pp.getR() * PRECISION_MULTIPLIER
                         * Math.sin(Math.toRadians(getOrientation())
                         + pp.getTheta())),
-                (int) (getCenter().y - pp.getR() * getRadius() * PRECISION_MULTIPLIER
+                (int) (getCenter().y - pp.getR() * PRECISION_MULTIPLIER
                         * Math.cos(Math.toRadians(getOrientation())
                         + pp.getTheta())));
 
@@ -139,29 +129,16 @@ public abstract class Sprite implements Movable {
 
     protected List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
-        BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
+        Function<Point, PolarPoint> cartToPolarTransform = pnt -> new PolarPoint(
                 //this is r from PolarPoint(r,theta).
-                hypotFunction(pnt.x, pnt.y) / hyp, //r is relative to the largestHypotenuse
+                hypotFunction(pnt.x, pnt.y),
                 //this is theta from PolarPoint(r,theta)
                 Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
         );
 
-
-        //determine the largest hypotenuse
-        double largestHypotenuse = 0;
-        for (Point pnt : pntCartesians)
-            if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
-                largestHypotenuse = hypotFunction(pnt.x, pnt.y);
-
-
-        //we must make hypotenuse final to pass into a stream.
-        final double hyp = largestHypotenuse;
-
-
         return pntCartesians.stream()
-                .map(pnt -> cartToPolarTransform.apply(pnt, hyp))
+                .map(pnt -> cartToPolarTransform.apply(pnt))
                 .collect(Collectors.toList());
-
     }
 
     @Override
@@ -191,11 +168,11 @@ public abstract class Sprite implements Movable {
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         Function<PolarPoint, Point> adjustForOrientation =
                 pp -> new Point(
-                        (int)  (pp.getR() * getRadius()
+                        (int)  (pp.getR()
                                 * Math.sin(Math.toRadians(getOrientation())
                                 + pp.getTheta())),
 
-                        (int)  (pp.getR() * getRadius()
+                        (int)  (pp.getR()
                                 * Math.cos(Math.toRadians(getOrientation())
                                 + pp.getTheta())));
 
@@ -206,9 +183,6 @@ public abstract class Sprite implements Movable {
                 p -> new Point(
                          getCenter().x + p.x,
                          getCenter().y - p.y);
-
-
-
         g.drawPolygon(
                 polars.stream()
                         .map(adjustForOrientation)
@@ -229,8 +203,8 @@ public abstract class Sprite implements Movable {
         //for debugging center-point. Feel free to remove these two lines.
         //#########################################
         g.setColor(Color.ORANGE);
-        g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2);
-        //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
+//        g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2);
+//        g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }
 

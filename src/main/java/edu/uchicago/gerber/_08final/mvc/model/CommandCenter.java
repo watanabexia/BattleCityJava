@@ -18,17 +18,23 @@ public class CommandCenter {
 	private  int level;
 	private  long score;
 	private  boolean paused;
+	private  boolean over = true;
+	private long frame_count = 0;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
 	//Lombok will not provide setter methods on final members
-	private final Falcon falcon  = new Falcon();
+	private final Tank tank_player = new Tank(Movable.Team.FRIEND);
 
 	//lists containing our movables
-	private final List<Movable> movDebris = new LinkedList<>();
+	private Map currentMap;
+
+	private final List<Movable> movHQs = new LinkedList<>();
 	private final List<Movable> movFriends = new LinkedList<>();
-	private final List<Movable> movFoes = new LinkedList<>();
-	private final List<Movable> movFloaters = new LinkedList<>();
+	private final List<Movable> movWalls = new LinkedList<>();
+	private final List<Movable> movEnemies = new LinkedList<>();
+	private final List<Movable> movBullets_friend = new LinkedList<>();
+	private final List<Movable> movBullets_enemy = new LinkedList<>();
 
 	private final GameOpsQueue opsQueue = new GameOpsQueue();
 
@@ -46,43 +52,56 @@ public class CommandCenter {
 		return instance;
 	}
 
-
 	public void initGame(){
 		clearAll();
-		setLevel(1);
+		setLevel(0);
 		setScore(0);
+		setFrame_count(0);
 		setPaused(false);
-		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
-		setNumFalcons(4);
-		initFalconAndDecrementFalconNum();
-		opsQueue.enqueue(falcon, GameOp.Action.ADD);
-
+		setOver(false);
+		Map currentMap = new Map(CommandCenter.getInstance().getLevel());
+		CommandCenter.getInstance().setCurrentMap(currentMap);
 	}
-
 
 	public void initFalconAndDecrementFalconNum(){
 		setNumFalcons(getNumFalcons() - 1);
+
+		if (numFalcons == 0) {
+			CommandCenter.getInstance().setOver(true);
+		}
+
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
-		falcon.setFade(Falcon.FADE_INITIAL_VALUE);
+		tank_player.setFade(Tank.FADE_INITIAL_VALUE);
 		//put falcon in the middle of the game-space
-		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
-		falcon.setOrientation(Game.R.nextInt(360));
-		falcon.setDeltaX(0);
-		falcon.setDeltaY(0);
+		Point Player_respawn = currentMap.getPlayer_respawn();
+
+		//Debug
+//		System.out.println(Player_respawn);
+
+		tank_player.setCenter(new Point(Player_respawn.x*Game.BLOCK_LENGTH + Game.BLOCK_LENGTH/2, Player_respawn.y*Game.BLOCK_LENGTH + Game.BLOCK_LENGTH/2));
+		tank_player.setOrientation(270);
+
+		tank_player.setDeltaX(0);
+		tank_player.setDeltaY(0);
+
+		opsQueue.enqueue(tank_player, GameOp.Action.ADD);
 	}
 
-	private void clearAll(){
-		movDebris.clear();
+	public void clearAll(){
+		movHQs.clear();
 		movFriends.clear();
-		movFoes.clear();
-		movFloaters.clear();
+		movWalls.clear();
+		movEnemies.clear();
+		movBullets_friend.clear();
+		movBullets_enemy.clear();
 	}
 
 	public boolean isGameOver() {		//if the number of falcons is zero, then game over
-		return getNumFalcons() <= 0;
+		return over;
 	}
 
-
-
+	public void addFrame_count() {
+		frame_count++;
+	}
 }
